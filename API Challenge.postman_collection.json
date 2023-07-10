@@ -1,0 +1,187 @@
+{
+	"info": {
+		"_postman_id": "e6be116b-9f11-4b47-bf8e-2445a0ebd96f",
+		"name": "API Challenge",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "1299124",
+		"_collection_link": "https://speeding-robot-1655.postman.co/workspace/Perficient~d605adc9-d32e-4319-9177-53faa7a42379/collection/1299124-e6be116b-9f11-4b47-bf8e-2445a0ebd96f?action=share&creator=1299124&source=collection_link"
+	},
+	"item": [
+		{
+			"name": "Get Matches",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "https://api.football-data.org/v4/matches"
+			},
+			"response": []
+		},
+		{
+			"name": "Get Stomp",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://www.football-data.org/stomp/info?t=1689031672645",
+					"protocol": "https",
+					"host": [
+						"www",
+						"football-data",
+						"org"
+					],
+					"path": [
+						"stomp",
+						"info"
+					],
+					"query": [
+						{
+							"key": "t",
+							"value": "1689031672645"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST Event",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 202\", function () {\r",
+							"    pm.response.to.have.status(202);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"ok\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"n\":\"pageview\",\"u\":\"https://www.football-data.org/\",\"d\":\"football-data.org\",\"r\":null}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "https://plausible.io/api/event"
+			},
+			"response": []
+		},
+		{
+			"name": "401",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"n\":\"pageview\",\"d\":\"football-data.orgg\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "https://plausible.io/api/event"
+			},
+			"response": []
+		},
+		{
+			"name": "Register",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "testing",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "testing@testing.com",
+							"type": "text"
+						},
+						{
+							"key": "codingLang",
+							"value": "JAVA",
+							"type": "text"
+						},
+						{
+							"key": "acceptTerms",
+							"value": "on",
+							"type": "text"
+						}
+					]
+				},
+				"url": "https://www.football-data.org/client/register"
+			},
+			"response": []
+		}
+	]
+}
